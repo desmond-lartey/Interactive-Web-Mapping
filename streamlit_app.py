@@ -12,7 +12,8 @@ apps = [
     {"func": heatmap.app, "title": "Heatmap", "icon": "map"},
     {"func": upload.app, "title": "Upload", "icon": "cloud-upload"},
     {"func": vector.app, "title": "Vector", "icon": "bounding-box"},
-    {"func": populations.app, "title": "Population & Capitals", "icon": "globe"},
+    {"func": populations.population_and_capitals_app, "title": "Population & Capitals", "icon": "globe"},
+
 ]
 
 titles = [app["title"] for app in apps]
