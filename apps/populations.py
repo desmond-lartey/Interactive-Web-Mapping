@@ -1,10 +1,10 @@
+import folium
 from streamlit_folium import folium_static
 import streamlit as st
 import leafmap.foliumap as leafmap
 import geopandas as gpd  # <-- This was missing
 
-import folium
-import geopandas as gpd
+
 
 def app():
     st.title("World Population and Capitals")
