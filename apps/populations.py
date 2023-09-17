@@ -14,7 +14,9 @@ def app():
     m = leafmap.Map(center=[20, 0], zoom=2)
 
     # Add the countries layer with population as popup
-    m.add_gdf(world, layer_name="Countries", popup=["name", "pop_est"])
+    world_json = world.to_json()
+    m.add_geojson(world_json, layer_name="Countries", popup=["name", "pop_est"])
+
 
     # Add the capitals layer
     m.add_gdf(capitals, layer_name="Capitals", popup="name", marker_type="marker")
