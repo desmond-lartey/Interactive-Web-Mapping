@@ -4,7 +4,6 @@ import leafmap.foliumap as leafmap
 import geopandas as gpd  # <-- This was missing
 
 import folium
-import streamlit as st
 import geopandas as gpd
 
 def app():
