@@ -2,23 +2,26 @@ import streamlit as st
 import leafmap.foliumap as leafmap
 import geopandas as gpd  # <-- This was missing
 
-def app():
+import folium
+import streamlit as st
+import geopandas as gpd
 
+def app():
     st.title("World Population and Capitals")
 
     # Using geopandas to fetch the datasets
     world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
     capitals = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
 
-    # Plotting the map
-    m = leafmap.Map(center=[20, 0], zoom=2)
+    m = folium.Map(location=[20, 0], zoom_start=2)
 
     # Add the countries layer with population as popup
-    world_json = world.to_json()
-    m.add_geojson(world_json, layer_name="Countries", popup=["name", "pop_est"])
-
+    folium.GeoJson(world, name="Countries", popup=folium.GeoJsonTooltip(fields=["name", "pop_est"])).add_to(m)
 
     # Add the capitals layer
-    m.add_gdf(capitals, layer_name="Capitals", popup="name", marker_type="marker")
+    folium.GeoJson(capitals, name="Capitals", popup=folium.GeoJsonTooltip(fields=["name"])).add_to(m)
 
-    m.to_streamlit(height=700)
+    folium.LayerControl().add_to(m)
+
+    # Display the map in Streamlit
+    folium_static(m)
