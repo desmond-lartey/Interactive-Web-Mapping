@@ -1,7 +1,9 @@
-import geopandas as gpd
+import streamlit as st
 import leafmap.foliumap as leafmap
 
-def population_and_capitals_app():
+
+def app():
+
     st.title("World Population and Capitals")
 
     # Using geopandas to fetch the datasets
