@@ -1,3 +1,4 @@
+from streamlit_folium import folium_static
 import streamlit as st
 import leafmap.foliumap as leafmap
 import geopandas as gpd  # <-- This was missing
