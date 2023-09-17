@@ -7,8 +7,6 @@ st.set_page_config(page_title="Streamlit Geospatial", layout="wide")
 # A dictionary of apps in the format of {"App title": "App icon"}
 # More icons can be found here: https://icons.getbootstrap.com
 
-from apps import home, heatmap, upload, vector, population_and_capitals_app
-
 apps = [
     {"func": home.app, "title": "Home", "icon": "house"},
     {"func": heatmap.app, "title": "Heatmap", "icon": "map"},
@@ -16,7 +14,6 @@ apps = [
     {"func": vector.app, "title": "Vector", "icon": "bounding-box"},
     {"func": population_and_capitals_app, "title": "Population & Capitals", "icon": "globe"},
 ]
-
 
 titles = [app["title"] for app in apps]
 titles_lower = [title.lower() for title in titles]
