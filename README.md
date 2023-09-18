@@ -1,9 +1,9 @@
 # streamlit-template
 
-A streamlit app template for geospatial applications based on [streamlit-option-menu](https://github.com/victoryhb/streamlit-option-menu).
+A streamlit app template for geospatial applications based on [streamlit-option-menu](https://github.com/desmond-lartey/Interactive-Web-Mapping).
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/giswqs/streamlit-template/master?urlpath=proxy/8501/)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://interactive-web-mapping-rcvdljsrsmapzxucpzw59m.streamlit.app/)
 
-App URL: <https://share.streamlit.io/giswqs/streamlit-template>
+App URL: <https://interactive-web-mapping-rcvdljsrsmapzxucpzw59m.streamlit.app/>
 
-![](https://i.imgur.com/xd64mCi.png)
+#![](https://i.imgur.com/xd64mCi.png)
