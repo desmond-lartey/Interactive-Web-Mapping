@@ -6,4 +6,4 @@ A streamlit app template for geospatial applications based on [streamlit-option-
 
 App URL: <https://interactive-web-mapping-rcvdljsrsmapzxucpzw59m.streamlit.app/>
 
-#![](https://i.imgur.com/xd64mCi.png)
+![](https://constructive.co/wp-content/uploads/2015/09/screenshot-soft.png)
