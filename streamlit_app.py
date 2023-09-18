@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from apps import home, heatmap, upload, vector, populations  # import your app modules here
+from apps import home, heatmap, upload, vector, populations, worldbank  # import your app modules here
 
 st.set_page_config(page_title="Streamlit Geospatial", layout="wide")
 
@@ -13,8 +13,9 @@ apps = [
     {"func": upload.app, "title": "Upload", "icon": "cloud-upload"},
     {"func": vector.app, "title": "Vector", "icon": "bounding-box"},
     {"func": populations.app, "title": "Population & Capitals", "icon": "globe"},
-
+    {"func": worldbank.app, "title": "Population Stats", "icon": "globe"}
 ]
+
 
 titles = [app["title"] for app in apps]
 titles_lower = [title.lower() for title in titles]
@@ -39,7 +40,7 @@ with st.sidebar:
     st.sidebar.title("About")
     st.sidebar.info(
         """
-        This web [app](https://share.streamlit.io/giswqs/streamlit-template) is maintained by [Qiusheng Wu](https://wetlands.io). You can follow me on social media:
+        This web [app](https://share.streamlit.io/giswqs/streamlit-template) is maintained by [Desmond Lartey](https://wetlands.io). You can follow me on social media:
             [GitHub](https://github.com/giswqs) | [Twitter](https://twitter.com/giswqs) | [YouTube](https://www.youtube.com/c/QiushengWu) | [LinkedIn](https://www.linkedin.com/in/qiushengwu).
         
         Source code: <https://github.com/giswqs/streamlit-template>
