@@ -3,9 +3,6 @@ from streamlit_folium import folium_static
 import streamlit as st
 import geopandas as gpd
 
-
-
-
 def app():
     st.title("World Population and Capitals")
 
