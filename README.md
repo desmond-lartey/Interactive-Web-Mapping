@@ -4,6 +4,6 @@ A streamlit app template for geospatial applications based on [streamlit-option-
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://interactive-web-mapping-rcvdljsrsmapzxucpzw59m.streamlit.app/)
 
-App URL: <https://interactive-web-mapping-rcvdljsrsmapzxucpzw59m.streamlit.app/>
+App URL: <https://interactive-web-mapping-fngbc2jguvtbntmczhaurh.streamlit.app/>
 
-![](https://i.imgur.com/xd64mCi.png)
+![](https://images.pexels.com/photos/586104/pexels-photo-586104.jpeg?auto=compress&cs=tinysrgb&w=600)

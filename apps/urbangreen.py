@@ -5,12 +5,13 @@ import pandas as pd
 def fetch_data_from_db(query):
     # Establish the connection
     conn = psycopg2.connect(
-        dbname="urbisgreen",
-        user="postgres",
-        password="agronl",
-        host="192.168.137.1",
-        port="5432"
-    )
+    dbname="urbisgreen",
+    user="postgres",
+    password="agronl",
+    host="192.168.0.110",  # Update this to the IP address of your PostgreSQL server machine
+    port="5432"
+)
+
     
     # Fetch data
     df = pd.read_sql_query(query, conn)
