@@ -14,7 +14,8 @@ apps = [
     {"func": upload.app, "title": "Upload", "icon": "cloud-upload"},
     {"func": vector.app, "title": "Vector", "icon": "bounding-box"},
     {"func": populations.app, "title": "Population & Capitals", "icon": "globe"},
-    {"func": worldbank.app, "title": "Population Stats", "icon": "globe"}
+    {"func": worldbank.app, "title": "Population Stats", "icon": "globe"},
+    {"func": urbangreen.app, "title": "Urbangreen Analysis", "icon": "globe"}
 ]
 
 
