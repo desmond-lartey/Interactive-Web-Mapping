@@ -6,4 +6,4 @@ A streamlit app template for geospatial applications based on [streamlit-option-
 
 App URL: <https://share.streamlit.io/giswqs/streamlit-template>
 
-![](https://i.imgur.com/xd64mCi.png)
+#![](https://i.imgur.com/xd64mCi.png)

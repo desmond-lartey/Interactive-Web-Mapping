@@ -20,17 +20,25 @@ def app():
     # Dropdown for metric selection
     metric = st.selectbox('Select Metric', combined_df['Series Name'].unique())
 
+    # Dropdown for chart type selection
+    chart_type = st.selectbox('Select Chart Type', ['Line', 'Bar', 'Area'])
+
     # Filter data based on selections
     filtered_data = combined_df[(combined_df['Country Name'] == country) & (combined_df['Series Name'] == metric)]
 
-    # Plotting the data
-    chart = alt.Chart(filtered_data).mark_line().encode(
+    # Base chart
+    base = alt.Chart(filtered_data).encode(
         x='Year:O',
         y='Value:Q',
         tooltip=['Year', 'Value']
-    ).properties(
-        width=600,
-        height=400
     )
 
-    st.altair_chart(chart, use_container_width=True)
+    # Plotting the data based on chart type
+    if chart_type == 'Line':
+        chart = base.mark_line() + base.mark_circle()
+    elif chart_type == 'Bar':
+        chart = base.mark_bar()
+    elif chart_type == 'Area':
+        chart = base.mark_area()
+
+    st.altair_chart(chart.properties(width=600, height=400), use_container_width=True)
