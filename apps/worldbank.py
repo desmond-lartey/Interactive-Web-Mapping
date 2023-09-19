@@ -4,8 +4,8 @@ import altair as alt
 
 # Assuming data has been preprocessed and saved as 'population_dynamics_long.csv'
 # and 'population_estimates_long.csv'
-dynamics_df = pd.read_csv('C:/Users/Gebruiker/Desktop/My Lab/Interactive-Web-Mapping/data/population_dynamics_long_refined.csv')
-estimates_df = pd.read_csv('C:/Users/Gebruiker/Desktop/My Lab/Interactive-Web-Mapping/data/population_estimates_long_refined.csv')
+dynamics_df = pd.read_csv('./data/population_dynamics_long_refined.csv')
+estimates_df = pd.read_csv('./data/population_estimates_long_refined.csv')
 
 
 def app():
