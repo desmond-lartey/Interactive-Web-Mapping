@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from apps import home, heatmap, upload, vector, populations, worldbank, urbangreen  # import your app modules here
+from apps import home, heatmap, upload, vector, populations, worldbank, urbangreen,budget  # import your app modules here
 
 st.set_page_config(page_title="Streamlit Geospatial", layout="wide")
 
@@ -15,7 +15,8 @@ apps = [
     {"func": vector.app, "title": "Vector", "icon": "bounding-box"},
     {"func": populations.app, "title": "Population & Capitals", "icon": "globe"},
     {"func": worldbank.app, "title": "Population Stats", "icon": "globe"},
-    {"func": urbangreen.app, "title": "Urbangreen Analysis", "icon": "globe"}
+    {"func": urbangreen.app, "title": "Urbangreen Analysis", "icon": "globe"},
+    {"func": budget.app, "title": "Budget Analysis", "icon": "globe"}
 ]
 
 

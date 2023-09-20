@@ -1,0 +1,26 @@
+climateclassification_id,Country,Winter Hardiness Zone,Temperature,Classification,Suitable Plant Species
+1,Albania,7a,-17.7 to -15.0,Redelijk (a),Juniperus communis Rosmarinus officinalis Lavandula spp.
+2,Belarus,5a,-28.9 to -26.1,Zeer goed (a),Betula pendula Tilia cordata Salix caprea
+3,Bulgaria,6b,-20.5 to -17.8,Goed (b),Pinus sylvestris Quercus robur Amelanchier spp.
+4,Croatia,7a,-17.7 to -15.0,Redelijk (a),Olea europaea Laurus nobilis Crataegus monogyna
+5,Czechia,6b,-20.5 to -17.8,Goed (b),Acer platanoides Carpinus betulus Syringa vulgaris
+6,Estonia,5a,-28.9 to -26.1,Zeer goed (a),Picea abies Betula pubescens Sorbus aucuparia
+7,Hungary,6b,-20.5 to -17.8,Goed (b),Fagus sylvatica Carpinus betulus Acer campestre
+8,Latvia,5a,-28.9 to -26.1,Zeer goed (a),Pinus mugo Larix decidua Betula pendula
+9,Lithuania,5a,-28.9 to -26.1,Zeer goed (a),Quercus robur Acer platanoides Alnus glutinosa
+10,Poland,6b,-20.5 to -17.8,Goed (b),Betula pendula Quercus robur Salix caprea
+11,Romania,7b,-14.9 to -12.3,Redelijk (b),Pinus nigra Populus alba Quercus petraea
+12,Serbia,7b,-14.9 to -12.3,Redelijk (b),Fraxinus ornus Tilia platyphyllos Cornus mas
+13,Slovakia,6b,-20.5 to -17.8,Goed (b),Picea abies Carpinus betulus Fagus sylvatica
+14,Ukraine,6b,-20.5 to -17.8,Goed (b),Pinus sylvestris Quercus robur Tilia cordata
+15,Bosnia,7a,-17.7 to -15.0,Redelijk (a),Carpinus betulus Taxus baccata Viburnum opulus
+16,Estonia,5a,-28.9 to -26.1,Zeer goed (a),Picea abies Betula pubescens Sorbus aucuparia
+17,Latvia,5a,-28.9 to -26.1,Zeer goed (a),Pinus mugo Larix decidua Betula pendula
+18,Lithuania,5a,-28.9 to -26.1,Zeer goed (a),Quercus robur Acer platanoides Alnus glutinosa
+19,Moldova,7b,-14.9 to -12.3,Redelijk (b),Prunus spinosa Cornus mas Amelanchier spp.
+20,Montenegro,7a,-17.7 to -15.0,Redelijk (a),Olea europaea Pinus heldreichii Quercus ilex
+21,North Macedonia,7b,-14.9 to -12.3,Redelijk (b),Acer platanoides Tilia platyphyllos Fraxinus angustifolia
+22,Serbia,7b,-14.9 to -12.3,Redelijk (b),Fraxinus ornus Tilia platyphyllos Cornus mas
+23,Ukraine,6b,-20.5 to -17.8,Goed (b),Pinus sylvestris Quercus robur Tilia cordata
+24,Turkey,7b,-14.9 to -12.3,Redelijk (b),Pinus nigra Prunus laurocerasus Juniperus communis
+25,Russia,Zones 1 to 5,-50 to -10,Harsh (a-c),Larix sibirica Betula pendula Picea obovata Rhododendron dauricum
