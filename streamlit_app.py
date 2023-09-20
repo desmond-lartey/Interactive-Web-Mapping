@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from apps import home, heatmap, upload, vector, populations, worldbank, urbangreen,climate  # import your app modules here
+from apps import home, heatmap, upload, vector, populations, worldbank, climate #urbangreen,climate  # import your app modules here
 
 st.set_page_config(page_title="Streamlit Geospatial", layout="wide")
 

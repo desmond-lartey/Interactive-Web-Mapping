@@ -244,26 +244,35 @@ def display_vulnerabilities():
 # Dominant Species Analysis function
 def display_dominant_species_analysis():
     st.subheader("Dominant Species Analysis")
-    st.write("This section displays the dominant species in each country and the spaces they occupy.")
+    st.write("This section will display dominant species in each country and the spaces they occupy.")
 
     # Read the shapefiles
     dominantspecies_gdf = gpd.read_file("./data/Geodatabasefiles/dominantspecies.shp")
     world_gdf = gpd.read_file("./data/Geodatabasefiles/world.shp")
 
+    # Define a bounding box for Europe (minx, miny, maxx, maxy)
+    europe_bbox = (-31.266, 27.6363, 39.8693, 81.5)
+
+    # Clip the world_gdf to this bounding box
+    world_gdf_clipped = world_gdf.cx[europe_bbox[0]:europe_bbox[2], europe_bbox[1]:europe_bbox[3]]
+
     # Buffer the geometries
     dominantspecies_gdf['buffered_geom'] = dominantspecies_gdf.geometry.buffer(0.0001)
 
     # Perform spatial join
-    joined_gdf = gpd.sjoin(world_gdf, dominantspecies_gdf, how="inner", op='intersects')
+    joined_gdf = gpd.sjoin(world_gdf_clipped, dominantspecies_gdf, how="inner", op='intersects')
 
     # Calculate intersection areas (assuming the CRS is in meters for area calculation)
     joined_gdf["IntersectionAreaInHectares"] = joined_gdf.apply(lambda row: row['geometry'].intersection(row['buffered_geom']).area / 10000, axis=1)
 
-    # Display the map
-    st.write("Map of Dominant Species by Country:")
-    st.map(joined_gdf)
+    # Filter by Country (for demonstration purposes)
+    filtered_gdf = joined_gdf[joined_gdf["Country"] == "Latvia"]
 
-    # Display the results as a table
-    st.write("Table of Dominant Species by Country:")
+    # Display the results
     columns_to_display = ["Country", "gridcode", "species", "IntersectionAreaInHectares"]
-    st.table(joined_gdf[columns_to_display])
+    st.table(filtered_gdf[columns_to_display])
+    
+    # Display the map (optional)
+    st.write("Spatial distribution of dominant species in Latvia:")
+    st.map(filtered_gdf)
+
