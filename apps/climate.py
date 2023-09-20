@@ -1,5 +1,8 @@
 import streamlit as st
+import plotly.express as px
 import pandas as pd
+import geopandas as gpd
+from streamlit_folium import folium_static
 
 # Load dataframes
 df_budget = pd.read_csv('./data/budget.csv')
@@ -15,19 +18,63 @@ def app():
         "Adaptation Strategies",
         "Climate Trends",
         "Climate Classification",
+        "Climate Projections",
+        "Climate Vulnerabilities",
+        "Dominant species"
         # ... add other analysis options here
     ]
-
+    
     choice = st.selectbox("Choose an analysis:", analysis_options)
 
+    df = None  # Initialize dataframe to None
+
     if choice == "Budget Analysis":
-        display_budget_analysis(df_budget)
+        df = display_budget_analysis(df_budget)
     elif choice == "Adaptation Strategies":
-        display_adaptation_strategies()
+        df = display_adaptation_strategies()
     elif choice == "Climate Trends":
-        display_climate_trends()
+        df = display_climate_trends()
+    elif choice == "Climate Classification":
+        df = display_climate_classification()
+    elif choice == "Climate Projections":
+        df = display_climate_projections()
+    elif choice == "Climate Vulnerabilities":
+        df = display_vulnerabilities()
+    elif choice == "Dominant species":
+        df = display_dominant_species_analysis()
+        
+        
     # ... add other choices as needed
 
+    # Visualization
+    st.subheader("Visualizations")
+
+    chart_options = [
+        "Select a chart type...",
+        "Line Chart",
+        "Stacked Line Chart",
+        "Bar Chart",
+        "Stacked Bar Chart",
+        "Pie Chart",
+        # ... add other chart types as needed
+    ]
+    chart_choice = st.selectbox("Choose a Chart Type:", chart_options)
+
+    if df is not None:  # Ensure we have a dataframe
+        if chart_choice == "Line Chart":
+            st.line_chart(df)
+        elif chart_choice == "Stacked Line Chart":
+            st.area_chart(df)
+        elif chart_choice == "Bar Chart":
+            st.bar_chart(df)  # If the dataframe doesn't have an index you want, you might need to set it
+        elif chart_choice == "Stacked Bar Chart":
+            # Stacked bar charts are a bit more complex and may need data reshaping
+            st.warning("Stacked Bar Chart is not implemented for this dataset.")
+        elif chart_choice == "Pie Chart":
+            # For pie charts, we should consider only one numeric column
+            st.warning("Pie Chart is not implemented for this dataset.")
+        # ... add other charting options as needed
+    
     # Default view
     if choice == analysis_options[0]:
         st.write("Please select an analysis from the dropdown above.")
@@ -125,24 +172,98 @@ def display_climate_trends():
 def display_climate_classification():
     st.subheader("Climate Classification")
     st.write("This section will display the analysis for Climate classification.")
-
-    # Assuming the data is loaded from a CSV for now
-    classification_data = pd.read_csv('./data/climateclassification.csv')
+    
+    # Read the data
+    df_classification = pd.read_csv('./data/climateclassification.csv')
 
     # 1. Which countries fall into specific winter hardiness zones?
     st.write("Countries in specific winter hardiness zones:")
 
-    grouped_zones = classification_data.groupby("Winter Hardiness Zone")
-    for zone, group in grouped_zones:
-        st.write(f"Zone: {zone}")
+    # Create a DataFrame for displaying the grouped results
+    zone_data = []
+    for zone, group in df_classification.groupby("Winter Hardiness Zone"):
         countries = ", ".join(group["Country"])
-        st.write(countries)
+        zone_data.append({"Winter Hardiness Zone": zone, "Countries": countries})
+
+    st.table(pd.DataFrame(zone_data))
 
     # 2. What are the most common plant species recommended for each climate classification?
     st.write("Most common plant species recommended for each climate classification:")
 
-    grouped_classification = classification_data.groupby("Classification")
-    for classification, group in grouped_classification:
-        st.write(f"Classification: {classification}")
-        common_species = group["Suitable Plant Species"].mode()[0]  # Most common plant species
-        st.write(f"Recommended Plant Species: {common_species}")
+    # Create a DataFrame for displaying the grouped results
+    classification_data = []
+    for classification, group in df_classification.groupby("Classification"):
+        common_species = group["Suitable Plant Species"].mode()[0]
+        classification_data.append({"Classification": classification, "Recommended Plant Species": common_species})
+
+    st.table(pd.DataFrame(classification_data))
+
+#Climate Projections:
+def display_climate_projections():
+    st.subheader("Climate Projections")
+    st.write("This section will display the analysis for Climate Projections.")
+    
+    # Read the data
+    df_projections = pd.read_csv('./data/climateprojections.csv')
+
+    # a. Which countries are projected to experience the most drastic changes in the next 30 years?
+    drastic_changes = df_projections[df_projections["30-Year Projection"].str.contains("warming", case=False, na=False)]
+    st.write("Countries projected to experience the most drastic changes in the next 30 years:")
+    st.table(drastic_changes[["Country", "30-Year Projection"]])
+
+    # b. Are there any trends in the 5-year, 10-year, and 30-year projections?
+    st.write("Trends in 5-year projection:")
+    st.table(df_projections["5-Year Projection"].value_counts().reset_index().rename(columns={"index": "5-Year Projection", "5-Year Projection": "Country Count"}))
+    
+    st.write("Trends in 10-year projection:")
+    st.table(df_projections["10-Year Projection"].value_counts().reset_index().rename(columns={"index": "10-Year Projection", "10-Year Projection": "Country Count"}))
+    
+    st.write("Trends in 30-year projection:")
+    st.table(df_projections["30-Year Projection"].value_counts().reset_index().rename(columns={"index": "30-Year Projection", "30-Year Projection": "Country Count"}))
+
+
+#Vulnerabilities:
+def display_vulnerabilities():
+    st.subheader("Vulnerabilities Analysis")
+    st.write("This section will display analysis related to vulnerabilities.")
+    
+    # Read the data
+    df_vulnerabilities = pd.read_csv('./data/vulnerabilities.csv')
+
+    # a. Which countries are projected to have the most significant vulnerabilities in the future?
+    increased_vulnerabilities = df_vulnerabilities[df_vulnerabilities["futurevulnerabilities"].str.contains("increased", case=False, na=False)]
+    st.write("Countries projected to have the most significant vulnerabilities in the future:")
+    st.table(increased_vulnerabilities[["Country", "futurevulnerabilities"]])
+
+    # b. What are the recommended plant species for countries with high risk future vulnerabilities?
+    high_risk_countries = df_vulnerabilities[df_vulnerabilities["futurevulnerabilities"].str.contains("risk", case=False, na=False)]
+    st.write("Recommended plant species for countries with high risk future vulnerabilities:")
+    st.table(high_risk_countries[["Country", "recommendedplantspecies"]])
+
+
+# Dominant Species Analysis function
+def display_dominant_species_analysis():
+    st.subheader("Dominant Species Analysis")
+    st.write("This section displays the dominant species in each country and the spaces they occupy.")
+
+    # Read the shapefiles
+    dominantspecies_gdf = gpd.read_file("./data/Geodatabasefiles/dominantspecies.shp")
+    world_gdf = gpd.read_file("./data/Geodatabasefiles/world.shp")
+
+    # Buffer the geometries
+    dominantspecies_gdf['buffered_geom'] = dominantspecies_gdf.geometry.buffer(0.0001)
+
+    # Perform spatial join
+    joined_gdf = gpd.sjoin(world_gdf, dominantspecies_gdf, how="inner", op='intersects')
+
+    # Calculate intersection areas (assuming the CRS is in meters for area calculation)
+    joined_gdf["IntersectionAreaInHectares"] = joined_gdf.apply(lambda row: row['geometry'].intersection(row['buffered_geom']).area / 10000, axis=1)
+
+    # Display the map
+    st.write("Map of Dominant Species by Country:")
+    st.map(joined_gdf)
+
+    # Display the results as a table
+    st.write("Table of Dominant Species by Country:")
+    columns_to_display = ["Country", "gridcode", "species", "IntersectionAreaInHectares"]
+    st.table(joined_gdf[columns_to_display])
