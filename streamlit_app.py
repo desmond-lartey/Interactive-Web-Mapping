@@ -46,9 +46,9 @@ with st.sidebar:
         This web [app](https://share.streamlit.io/giswqs/streamlit-template) is maintained by [Desmond Lartey](https://github.com/desmond-lartey). You can follow me on social media:
             [GitHub](https://github.com/desmond-lartey) | [Twitter](https://twitter.com/Desmondlartey17) | [YouTube](https://www.youtube.com/watch?v=BZMSFcrSbwU) | [LinkedIn](https://www.linkedin.com/in/desmond-lartey/).
         
-        Source code: <>
+        -
 
-        More menu icons: <>
+        
     """
     )
 
