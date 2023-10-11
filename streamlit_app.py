@@ -10,10 +10,10 @@ st.set_page_config(page_title="Streamlit Geospatial", layout="wide")
 
 apps = [
     {"func": home.app, "title": "Home", "icon": "house"},
-    {"func": heatmap.app, "title": "Heatmap", "icon": "map"},
-    {"func": upload.app, "title": "Upload", "icon": "cloud-upload"},
-    {"func": vector.app, "title": "Vector", "icon": "bounding-box"},
-    {"func": populations.app, "title": "Population & Capitals", "icon": "globe"},
+    #{"func": heatmap.app, "title": "Heatmap", "icon": "map"},
+    #{"func": upload.app, "title": "Upload", "icon": "cloud-upload"},
+    #{"func": vector.app, "title": "Vector", "icon": "bounding-box"},
+    #{"func": populations.app, "title": "Population & Capitals", "icon": "globe"},
     {"func": worldbank.app, "title": "Population Stats", "icon": "globe"},
     #{"func": urbangreen.app, "title": "Urbangreen Analysis", "icon": "globe"},
     {"func": climate.app, "title": "Climate Analysis", "icon": "globe"}
