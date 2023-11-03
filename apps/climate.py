@@ -80,13 +80,13 @@ def app():
         st.write("Please select an analysis from the dropdown above.")
 
 # Budget Analysis Functions
-def get_highest_budgets(df_budget, n=15):
+def get_highest_budgets(df_budget, n=30):
     return df_budget.nlargest(n, 'Estimated_Budget')[['Country', 'Estimated_Budget']]
 
-def get_lowest_budgets(df_budget, n=1):
+def get_lowest_budgets(df_budget, n=30):
     return df_budget.nsmallest(n, 'Estimated_Budget')[['Country', 'Estimated_Budget']]
 
-def get_vulnerabilities_for_top_budgets(df_budget, n=10):
+def get_vulnerabilities_for_top_budgets(df_budget, n=30):
     top_countries = df_budget.nlargest(n, 'Estimated_Budget')['Country'].tolist()
     return df_budget[df_budget['Country'].isin(top_countries)][['Country', 'Climate_Vulnerabilities', 'Estimated_Budget']]
 
@@ -125,7 +125,7 @@ def display_adaptation_strategies():
     # 3. List the common adaptation strategies for countries with specific vulnerabilities
     st.write("Adaptation Strategies for Countries with 'Water scarcity' Vulnerability:")
     water_scarcity_data = adaptation_data[adaptation_data['ClimateVulnerabilities'].str.contains('Water scarcity', case=False, na=False)]
-    water_scarcity_strategies = water_scarcity_data['strategies'].value_counts().nlargest(5)
+    water_scarcity_strategies = water_scarcity_data['strategies'].value_counts().nlargest(30)
     st.write(water_scarcity_strategies)
 
     # 4. List countries with specific vulnerabilities and their adaptation strategies
