@@ -43,7 +43,7 @@ with st.sidebar:
     st.sidebar.title("About")
     st.sidebar.info(
         """
-        This web [app](https://share.streamlit.io/giswqs/streamlit-template) is maintained by [Desmond Lartey](https://github.com/desmond-lartey). Contact for any mulfunction of the App:
+        This web app is maintained by [Desmond Lartey](https://github.com/desmond-lartey). Contact for any mulfunction of the App:
             [GitHub](https://github.com/desmond-lartey) | [Twitter](https://twitter.com/Desmondlartey17) | [YouTube](https://www.youtube.com/watch?v=BZMSFcrSbwU) | [LinkedIn](https://www.linkedin.com/in/desmond-lartey/).
         
         -
