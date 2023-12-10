@@ -40,6 +40,9 @@ def plot_emissions(data, chart_type="pie"):
         fig = px.pie(data, names="Category", values="Emissions", title="Your Carbon Emissions Breakdown")
     return fig
 
+#chart_type = st.selectbox("Select Chart Type", ["pie", "bar", "line"], index=0)  # Default is 'pie'
+#st.plotly_chart(plot_emissions(emissions_data, chart_type))
+
 def app():
     st.title("Global Carbon Calculator App")
 
