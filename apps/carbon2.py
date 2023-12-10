@@ -30,6 +30,15 @@ def calculate_transportation_emissions(api_key, route, vehicle_type, vehicle_wei
 def plot_emissions(data):
     fig = px.bar(data, x="Category", y="Emissions", title="Your Carbon Emissions Breakdown")
     return fig
+    
+def plot_emissions(data, chart_type="pie"):
+    if chart_type == "bar":
+        fig = px.bar(data, x="Category", y="Emissions", title="Your Carbon Emissions Breakdown")
+    elif chart_type == "line":
+        fig = px.line(data, x="Category", y="Emissions", title="Your Carbon Emissions Breakdown")
+    else:  # Default to pie chart
+        fig = px.pie(data, names="Category", values="Emissions", title="Your Carbon Emissions Breakdown")
+    return fig
 
 def app():
     st.title("Global Carbon Calculator App")
