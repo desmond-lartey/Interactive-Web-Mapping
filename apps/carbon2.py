@@ -2,16 +2,19 @@ import streamlit as st
 import requests
 import pandas as pd
 import plotly.express as px
+import os
 
 # Function for Climatiq API Integration
-def calculate_transportation_emissions(api_key, route, vehicle_type, vehicle_weight):
-    url = "https://beta4.api.climatiq.io/freight/intermodal"
+def calculate_transportation_emissions(api_key, start_location, end_location, vehicle_type, vehicle_weight):
+    url = "https://beta4.api.climatiq.io/estimate"
     headers = {'Authorization': f'Bearer {api_key}'}
     data = {
-        "route": route,
-        "cargo": {
-            "weight": vehicle_weight,
-            "weight_unit": "t"
+        "emission_factor": {
+            "activity_id": "passenger_vehicle-vehicle_type_automobiles-fuel_source_na-engine_size_na-vehicle_age_na-vehicle_weight_na",
+        },
+        "parameters": {
+            "distance": vehicle_weight,
+            "distance_unit": "km"
         }
     }
 
@@ -27,21 +30,14 @@ def calculate_transportation_emissions(api_key, route, vehicle_type, vehicle_wei
         return None
 
 # Function to plot emissions data
-def plot_emissions(data):
-    fig = px.bar(data, x="Category", y="Emissions", title="Your Carbon Emissions Breakdown")
-    return fig
-    
 def plot_emissions(data, chart_type="pie"):
     if chart_type == "bar":
         fig = px.bar(data, x="Category", y="Emissions", title="Your Carbon Emissions Breakdown")
     elif chart_type == "line":
         fig = px.line(data, x="Category", y="Emissions", title="Your Carbon Emissions Breakdown")
-    else:  # Default to pie chart
+    else:
         fig = px.pie(data, names="Category", values="Emissions", title="Your Carbon Emissions Breakdown")
     return fig
-
-#chart_type = st.selectbox("Select Chart Type", ["pie", "bar", "line"], index=0)  # Default is 'pie'
-#st.plotly_chart(plot_emissions(emissions_data, chart_type))
 
 def app():
     st.title("Global Carbon Calculator App")
@@ -49,7 +45,7 @@ def app():
     # Original Carbon Footprint Calculation
     st.header("Calculate Your Carbon Footprint")
 
-    country = st.selectbox("Select Your Country", ["India"])  # Add more countries as needed
+    country = st.selectbox("Select Your Country", ["India"])
     col1, col2 = st.columns(2)
 
     with col1:
@@ -92,7 +88,8 @@ def app():
             "Category": ["Transportation", "Electricity", "Diet", "Waste"],
             "Emissions": [transportation_emissions, electricity_emissions, diet_emissions, waste_emissions]
         })
-        st.plotly_chart(plot_emissions(emissions_data))
+        chart_type = st.selectbox("Select Chart Type", ["pie", "bar", "line"], index=0)  # Default is 'pie'
+        st.plotly_chart(plot_emissions(emissions_data, chart_type))
 
     # Climatiq API Integration for Transportation Emissions
     st.header("Calculate Transportation Emissions (Climatiq API)")
@@ -102,16 +99,10 @@ def app():
     vehicle_type = st.selectbox("Vehicle Type", ["van", "truck", "air", "sea"])
     vehicle_weight = st.number_input("Vehicle Weight (in tonnes)", min_value=0.1, step=0.1)
 
-    route = [
-        {"location": {"query": start_location}},
-        {"transport_mode": vehicle_type, "leg_details": {"vehicle_type": vehicle_type, "vehicle_weight": f"lte_{vehicle_weight}t"}},
-        {"location": {"query": end_location}}
-    ]
-
-    API_KEY = 'YN8AMDGBFNMGZ9P1DX711NQGK946'  # Replace with a secure method of storing the API key
+    API_KEY = os.environ.get("CLIMATIQ_API_KEY")
 
     if st.button("Calculate Transportation Emissions (API)"):
-        emission_data = calculate_transportation_emissions(API_KEY, route, vehicle_type, vehicle_weight)
+        emission_data = calculate_transportation_emissions(API_KEY, start_location, end_location, vehicle_type, vehicle_weight)
         
         if emission_data:
             st.write("Total CO2 Emissions for the trip:", emission_data.get('co2e', 0), "kg CO2e")
