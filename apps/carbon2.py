@@ -49,7 +49,7 @@ def app():
     # Original Carbon Footprint Calculation
     st.header("Calculate Your Carbon Footprint")
 
-    country = st.selectbox("Select Your Country", ["India"])
+    country = st.selectbox("Select Your Country", ["Netherlands"])
     col1, col2 = st.columns(2)
 
     with col1:
