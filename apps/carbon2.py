@@ -29,6 +29,34 @@ def calculate_transportation_emissions(api_key, start_location, end_location, ve
         st.error(f"Error fetching data: {e}")
         return None
 
+def calculate_transportation_emissions(api_key, start_location, end_location, vehicle_weight):
+    url = "https://beta4.api.climatiq.io/estimate"
+    headers = {'Authorization': f'Bearer {api_key}'}
+    
+    data = {
+        "emission_factor": {
+            "activity_id": "aircraft_flight-route_type_domestic-aircraft_type_na-distance_na-class_na-rf_na",
+            "data_version": "^6"
+        },
+        "parameters": {
+            "weight": vehicle_weight,
+            "weight_unit": "t",
+            "origin": start_location,
+            "destination": end_location
+        }
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            st.error(f"API Error: {response.status_code}")
+            return None
+    except Exception as e:
+        st.error(f"Error fetching data: {e}")
+        return None
+
 # Function to plot emissions data
 def plot_emissions(data, chart_type="pie"):
     if chart_type == "bar":
