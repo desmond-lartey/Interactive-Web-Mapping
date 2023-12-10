@@ -27,9 +27,6 @@ icons = [app["icon"] for app in apps]
 
 params = st.experimental_get_query_params()
 
-chart_type = st.selectbox("Select Chart Type", ["pie", "bar", "line"], index=0)  # Default is 'pie'
-st.plotly_chart(plot_emissions(emissions_data, chart_type))
-
 if "page" in params:
     default_index = int(titles_lower.index(params["page"][0].lower()))
 else:
