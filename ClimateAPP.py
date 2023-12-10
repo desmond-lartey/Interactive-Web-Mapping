@@ -57,3 +57,6 @@ for app in apps:
     if app["title"] == selected:
         app["func"]()
         break
+
+API_KEY = os.environ.get("CLIMATIQ_API_KEY")
+st.write("API Key is:", API_KEY)  # Temporary line for debugging
