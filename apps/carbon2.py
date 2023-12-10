@@ -5,30 +5,6 @@ import plotly.express as px
 import os
 
 # Function for Climatiq API Integration
-def calculate_transportation_emissions(api_key, start_location, end_location, vehicle_type, vehicle_weight):
-    url = "https://beta4.api.climatiq.io/estimate"
-    headers = {'Authorization': f'Bearer {api_key}'}
-    data = {
-        "emission_factor": {
-            "activity_id": "passenger_vehicle-vehicle_type_automobiles-fuel_source_na-engine_size_na-vehicle_age_na-vehicle_weight_na",
-        },
-        "parameters": {
-            "distance": vehicle_weight,
-            "distance_unit": "km"
-        }
-    }
-
-    try:
-        response = requests.post(url, headers=headers, json=data)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            st.error(f"API Error: {response.status_code}")
-            return None
-    except Exception as e:
-        st.error(f"Error fetching data: {e}")
-        return None
-
 def calculate_transportation_emissions(api_key, start_location, end_location, vehicle_weight):
     url = "https://beta4.api.climatiq.io/estimate"
     headers = {'Authorization': f'Bearer {api_key}'}
