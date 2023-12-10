@@ -60,5 +60,3 @@ for app in apps:
         app["func"]()
         break
 
-API_KEY = os.environ.get("CLIMATIQ_API_KEY")
-st.write("API Key is:", API_KEY)  # Temporary line for debugging
