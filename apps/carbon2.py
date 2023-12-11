@@ -68,7 +68,7 @@ def app():
     }
 
     EMISSION_FACTORS = {
-        "India": {
+        "Netherlands": {
             "Transportation": 0.14,
             "Electricity": 0.82,
             "Diet": 1.25,
